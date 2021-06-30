@@ -213,6 +213,12 @@ def DrawMapFromCoords(canvas, wsi_object, coords, patch_size, vis_level, indices
     return Image.fromarray(canvas)
 
 def StitchPatches(hdf5_file_path, downscale=16, draw_grid=False, bg_color=(0,0,0), alpha=-1):
+    if not os.path.isfile(hdf5_file_path):
+        import time
+        time.sleep(5)
+    if not os.path.isfile(hdf5_file_path):
+        print("ERROR while stitching: %s" % os.path.split(hdf5_file_path)[-1][:-len(".h5")])
+        return None
     file = h5py.File(hdf5_file_path, 'r')
     dset = file['imgs']
     coords = file['coords'][:]

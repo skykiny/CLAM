@@ -177,7 +177,8 @@ def seg_and_patch(source, save_dir, patch_save_dir, mask_save_dir, stitch_save_d
 			file_path = os.path.join(patch_save_dir, slide_id+'.h5')
 			heatmap, stitch_time_elapsed = stitching(file_path, downscale=64)
 			stitch_path = os.path.join(stitch_save_dir, slide_id+'.png')
-			heatmap.save(stitch_path)
+			if heatmap is not None:
+				heatmap.save(stitch_path)
 
 		print("segmentation took {} seconds".format(seg_time_elapsed))
 		print("patching took {} seconds".format(patch_time_elapsed))

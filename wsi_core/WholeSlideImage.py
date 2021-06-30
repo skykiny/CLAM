@@ -455,6 +455,7 @@ class WholeSlideImage(object):
         iterable = [(coord, contour_holes, ref_patch_size[0], cont_check_fn) for coord in coord_candidates]
         results = pool.starmap(WholeSlideImage.process_coord_candidate, iterable)
         pool.close()
+        # results = [WholeSlideImage.process_coord_candidate(*it_i) for it_i in iterable]
         results = np.array([result for result in results if result is not None])
         
         print('Extracted {} coordinates'.format(len(results)))
